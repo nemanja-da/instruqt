@@ -1,0 +1,14 @@
+init()
+{
+    source /root/.bashrc
+    daml new create-daml-app --template create-daml-app
+    cd /root/create-daml-app/ui
+    cd src/components
+    touch MessageList.tsx
+    touch MessageEdit.tsx
+    cd /root/create-daml-app/
+}
+
+echo Initialising...
+init
+echo Done!

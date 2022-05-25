@@ -1,0 +1,36 @@
+#!/bin/bash
+echo "Running challenge setup script on host container"
+
+# Configuring the environment for more file watchers
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+apt -y update
+apt -y upgrade
+apt -y install wget
+apt -y install default-jre zip
+
+curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+apt -y install nodejs
+
+curl -sSL https://get.daml.com/ | sh
+echo "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64" >> /root/.bashrc
+echo 'export PATH="$HOME/.daml/bin:$PATH"' >> /root/.bashrc
+source /root/.bashrc
+
+code-server --install-extension $(find ~/.daml/sdk/*/studio/daml-bundled.vsix) --user-data-dir /user-data
+
+# Hack to not show the release notes
+mkdir -p /user-data/User/state/ \
+    && echo "[[\"DigitalAssetHoldingsLLC.daml-bundled\", \"{\\\"version\\\":\\\"${SDK_VERSION}\\\", \\\"telemetry-consent\\\": false}\"]]" > /user-data/User/state/global.json
+
+# Opt out of telemetry
+mkdir -p $HOME/.daml \
+    && touch $HOME/.daml/.opted_out
+
+# Adjust VSCode settings
+mkdir -p /user-data/User
+cat > /user-data/User/settings.json <<EOF
+{
+  "workbench.colorTheme": "Default Dark+"
+}
+EOF

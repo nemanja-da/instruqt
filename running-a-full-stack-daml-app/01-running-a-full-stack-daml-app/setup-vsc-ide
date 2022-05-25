@@ -1,0 +1,10 @@
+#!/bin/bash
+echo "Running challenge setup script on host container"
+
+# Adjust VSCode settings
+mkdir -p /user-data/User
+cat > /user-data/User/settings.json <<EOF
+{
+  "workbench.colorTheme": "Default Dark+"
+}
+EOF

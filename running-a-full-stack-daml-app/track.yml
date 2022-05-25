@@ -1,0 +1,23 @@
+slug: running-a-full-stack-daml-app
+id: fdw0c2gseqax
+type: track
+title: Run a full-stack Daml Application
+description: |-
+  This is the Getting Started with Daml track
+
+  **This track demonstrates how to:**
+  - Add IDE code editor features to an Instruqt track
+  - Use a code server container to serve a VSCode IDE
+  - Run a unit test suite in a check script
+icon: ""
+tags:
+- Daml
+- ' vscode'
+- ' typescript'
+owner: digitalasset
+developers:
+- nemanja.memarovic@digitalasset.com
+private: true
+published: false
+skipping_enabled: true
+checksum: "17291324241080146639"
